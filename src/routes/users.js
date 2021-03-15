@@ -6,7 +6,7 @@ const  authenticate  = require('../services/authentication');
 const MailService = require('../services/mail')
 const bcrypt = require('bcrypt')
 const crypto = require('crypto')
-const nanoid = require('nanoid')
+const { nanoid } = require('nanoid')
 
 
 const router = express.Router();
