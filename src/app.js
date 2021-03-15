@@ -6,7 +6,7 @@ const bodyParser = require('body-parser')
 const jwt = require('jsonwebtoken')
 
 const userRoute = require('./routes/users')
-const postRoute = require('./routes/Posts')
+const postRoute = require('./routes/posts')
 
 const app = express();
 const port = process.env.PORT || 5000;
