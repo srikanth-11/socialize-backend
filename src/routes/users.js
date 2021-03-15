@@ -126,7 +126,7 @@ router.post('/forgot-password', async(req,res) => {
          const mailSubject = 'Reset Password for socialize app';
          const mailBody = `<div>
              <h3>Reset Password</h3>
-             <p>Please click the given link to reset your password <a target="_blank" href="${process.env.REQUEST_ORIGIN}/reset-password/${encodeURI(resetToken)}"> click here </a></p>
+             <p>Please click the given link to reset your password <a target="_blank" href="${process.env.REQUEST_ORIGIN}/reset-password/${encodeURIComponent(resetToken)}"> click here </a></p>
          </div>`;
 
          const mailTo = user.email;
@@ -155,7 +155,7 @@ router.post('/forgot-password', async(req,res) => {
 router.put('/reset', async(req,res) => {
    try {
       console.log(req.body.token)
-      let user = await User.findOne({ resetPasswordToken: decodeURI(req.body.token), resetPasswordTokenExpiry: { $gt: Date.now() } });
+      let user = await User.findOne({ resetPasswordToken: decodeURIComponent(req.body.token), resetPasswordTokenExpiry: { $gt: Date.now() } });
       console.log(user)
       if (user) {
         
@@ -165,7 +165,7 @@ router.put('/reset', async(req,res) => {
          // Updating user password
          user.password = hashPassword;
          user.resetPasswordToken = '';
-         user.resetPasswordTokenExpiry = Date.now();
+         user.resetPasswordTokenExpiry = '';
          await user.save();
 
          // Send message for suucessfull password reset
