@@ -6,6 +6,7 @@ const  authenticate  = require('../services/authentication');
 const MailService = require('../services/mail')
 const bcrypt = require('bcrypt')
 const crypto = require('crypto')
+const nanoid = require('nanoid')
 
 
 const router = express.Router();
@@ -115,7 +116,7 @@ router.post('/forgot-password', async(req,res) => {
       let user = await User.findOne({ email: req.body.email });
 
       if(user) {
-         let resetToken = await crypto.randomBytes(32).toString('hex');
+         let resetToken = nanoid(10)
          user.resetPasswordToken = resetToken;
          user.resetPasswordTokenExpiry = Date.now() + 30000;
           await user.save();
