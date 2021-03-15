@@ -160,7 +160,7 @@ router.put('/reset', async(req,res) => {
       if (user) {
         
          let salt = await bcrypt.genSalt(10);
-         let hashPassword = await bcrypt.hash( req.body.password, salt);
+         let hashPassword = await bcrypt.hash(req.body.password, salt);
 
          // Updating user password
          user.password = hashPassword;
