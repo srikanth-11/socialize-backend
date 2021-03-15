@@ -156,7 +156,7 @@ router.post('/forgot-password', async(req,res) => {
 router.put('/reset', async(req,res) => {
    try {
       console.log(req.body.token)
-      let user = await User.findOne({ resetPasswordToken: decodeURIComponent(req.body.token));
+      let user = await User.findOne({ resetPasswordToken: decodeURIComponent(req.body.token)});
       console.log(user)
       if (user) {
         
